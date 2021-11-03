@@ -104,6 +104,8 @@ df_32
 ```{r}
 
 # 會保留最後一個
+installed.packages("dplyr")
+library(dplyr)
 df_32 %>% distinct(B, .keep_all = TRUE)
 
 ```
@@ -201,22 +203,22 @@ df_34
 
 ```{r}
 
-# 1 請讀取 /raw/winemag-data_first150k.csv 內的資料，存於變數 df。
-
+# 1 請讀取  內的資料，存於變數 df。
+df <- read_csv("C:/Users/AA/Documents/GitHub/RDataAnalysis_TKU_2021Fall/raw/winemag-data_first150k.csv");df
 
 # 2. 請問 country 欄位，在排除 NA 值後，共有幾個特殊值?
-
+df1 <- df %>% drop_na(country) %>% distinct(country)
 
 # 3. 請挑選出 country 為 US, 且 price 在 100 以上的 rows。
-
+df2 <- df %>% filter(country=="US" & price > 100)
 
 # 4. 請創造一新欄位 NewPrice 為 Price*30。
-
+df3 <- df %>% mutate(NewPrice=price*30)
 
 # 5. 請創造一新欄位 IsFrance
 # - 當 country==France 的時候，該值為 T。
 # - 當 country!=France 的時候，該值為 F。
-
+df %>% mutate(IsFrance=ifelse(country=="France",T,F))
 
 ```
 
